@@ -60,6 +60,22 @@ function App() {
                     </ProtectedRoute>
                   } 
                 />
+                {/* <Route 
+                  path="/projects" 
+                  element={
+                    <ProtectedRoute>
+                      <ProjectList />
+                    </ProtectedRoute>
+                  } 
+                /> */}
+                <Route 
+                  path="/projects/create" 
+                  element={
+                    <ProtectedRoute requireAdmin>
+                      <CreateProject />
+                    </ProtectedRoute>
+                  } 
+                />
                 <Route 
                   path="/projects/:id" 
                   element={
@@ -68,13 +84,13 @@ function App() {
                     </ProtectedRoute>
                   } 
                 />
-                <Route 
-                  path="/projects/create" 
+                {/* <Route 
+                  path="/tasks" 
                   element={
-                    <ProtectedRoute requireAdmin>
-                      <CreateProject />
+                    <ProtectedRoute>
+                      <TaskList />
                     </ProtectedRoute>
-                  } 
+                  }  */}
                 />
                 <Route 
                   path="/projects/:projectId/tasks/create" 

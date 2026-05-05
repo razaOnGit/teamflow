@@ -4,6 +4,7 @@ import { ArrowLeft, Plus, Calendar, Users, CheckSquare } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../api/axios';
 import StatusBadge from '../../components/StatusBadge';
+import MemberManagement from '../../components/MemberManagement';
 import { TASK_STATUS, TASK_STATUS_LABELS } from '../../utils/constants';
 
 const ProjectDetail = () => {
@@ -26,6 +27,20 @@ const ProjectDetail = () => {
     } catch (error) {
       console.error('Failed to fetch project:', error);
     }
+  };
+
+  const handleMemberAdded = (newMember) => {
+    setProject(prev => ({
+      ...prev,
+      members: [...(prev.members || []), newMember]
+    }));
+  };
+
+  const handleMemberRemoved = (userId) => {
+    setProject(prev => ({
+      ...prev,
+      members: prev.members?.filter(member => member.user.id !== userId) || []
+    }));
   };
 
   const fetchTasks = async () => {
@@ -141,33 +156,15 @@ const ProjectDetail = () => {
       </div>
 
       {/* Project Members */}
-      {project.members && project.members.length > 0 && (
-        <div className="card">
-          <div className="card-header">
-            <h3 className="text-lg font-semibold">Team Members</h3>
-          </div>
-          <div className="card-content">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {project.members.map((member) => (
-                <div key={member.id} className="flex items-center space-x-3">
-                  <div className="flex-shrink-0">
-                    <div className="h-10 w-10 rounded-full bg-primary-500 flex items-center justify-center text-white font-medium">
-                      {member.user.name.charAt(0).toUpperCase()}
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium text-gray-900">{member.user.name}</p>
-                    <p className="text-sm text-gray-500">{member.user.email}</p>
-                  </div>
-                  <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                    {member.user.role}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
+      <div className="card">
+        <div className="card-header">
+          <MemberManagement 
+            project={project}
+            onMemberAdded={handleMemberAdded}
+            onMemberRemoved={handleMemberRemoved}
+          />
         </div>
-      )}
+      </div>
 
       {/* Task Tabs */}
       <div className="border-b border-gray-200">
