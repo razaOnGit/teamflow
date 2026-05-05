@@ -12,10 +12,12 @@ import Signup from './pages/Auth/Signup';
 import Dashboard from './pages/Dashboard/Dashboard';
 
 // Project pages
+import Projects from './pages/Project/Projects';
 import ProjectDetail from './pages/Project/ProjectDetail';
 import CreateProject from './pages/Project/CreateProject';
 
 // Task pages
+import TaskList from './pages/Task/TaskList';
 import TaskDetail from './pages/Task/TaskDetail';
 import CreateTask from './pages/Task/CreateTask';
 
@@ -60,14 +62,14 @@ function App() {
                     </ProtectedRoute>
                   } 
                 />
-                {/* <Route 
+                <Route 
                   path="/projects" 
                   element={
                     <ProtectedRoute>
-                      <ProjectList />
+                      <Projects />
                     </ProtectedRoute>
                   } 
-                /> */}
+                />
                 <Route 
                   path="/projects/create" 
                   element={
@@ -84,13 +86,13 @@ function App() {
                     </ProtectedRoute>
                   } 
                 />
-                {/* <Route 
+                <Route 
                   path="/tasks" 
                   element={
                     <ProtectedRoute>
                       <TaskList />
                     </ProtectedRoute>
-                  }  */}
+                  } 
                 />
                 <Route 
                   path="/projects/:projectId/tasks/create" 
