@@ -42,6 +42,11 @@ app.use('*', (req, res) => {
     path: req.originalUrl 
   });
 });
+app.get('/', (req, res) => {
+  res.json({
+    message: 'TeamFlow Backend API Running'
+  });
+});
 
 // Global error handler
 app.use((error, req, res, next) => {
