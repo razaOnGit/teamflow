@@ -28,6 +28,11 @@ app.get('/health', (req, res) => {
     environment: process.env.NODE_ENV 
   });
 });
+app.get('/', (req, res) => {
+  res.json({
+    message: 'TeamFlow Backend API Running'
+  });
+});
 
 // API Routes
 app.use('/api/auth', authRoutes);
@@ -42,11 +47,7 @@ app.use('*', (req, res) => {
     path: req.originalUrl 
   });
 });
-app.get('/', (req, res) => {
-  res.json({
-    message: 'TeamFlow Backend API Running'
-  });
-});
+
 
 // Global error handler
 app.use((error, req, res, next) => {
